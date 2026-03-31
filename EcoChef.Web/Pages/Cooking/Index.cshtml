@@ -1,0 +1,29 @@
+﻿@page
+@model EcoChef.Web.Pages.Cooking.IndexModel
+@{
+    ViewData["Title"] = "Gătire";
+}
+
+<h1>Gătire</h1>
+<div asp-validation-summary="All"></div> <!--afiseaza mesajele de eroare daca exista-->
+
+<form method="post">
+    <div>
+        <label>Rețetă:</label>
+        <select name="RetetaId"> <!--select is dropdown menu-->
+            @foreach (var reteta in Model.Retete)
+            {
+                <option value="@reteta.Id">@reteta.Nume</option> //option sunt optiunile din dropdown
+            }
+        </select>
+    </div>
+
+    <div>
+        <label>Număr porții:</label>
+        <input type="number" name="NrPortii" value="1" min="1"/> <!--value e 1 default si minimum 1 portie-->
+
+    </div>
+
+    <button type="submit">Gatește</button>
+
+</form>

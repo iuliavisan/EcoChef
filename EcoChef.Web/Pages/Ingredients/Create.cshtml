@@ -1,0 +1,59 @@
+﻿@page
+@model EcoChef.Web.Pages.Ingredients.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Ingredient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Ingredient.Nume" class="control-label"></label>
+                <input asp-for="Ingredient.Nume" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Ingredient.Nume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Ingredient.UnitateMasura" class="control-label"></label>
+                <input asp-for="Ingredient.UnitateMasura" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Ingredient.UnitateMasura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Ingredient.PretAchizitie" class="control-label"></label>
+                <input asp-for="Ingredient.PretAchizitie" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Ingredient.PretAchizitie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Ingredient.StocCurent" class="control-label"></label>
+                <input asp-for="Ingredient.StocCurent" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Ingredient.StocCurent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Ingredient.DataExpirare" class="control-label"></label>
+                <input asp-for="Ingredient.DataExpirare" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Ingredient.DataExpirare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

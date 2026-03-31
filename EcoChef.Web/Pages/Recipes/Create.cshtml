@@ -1,0 +1,45 @@
+﻿@page
+@model EcoChef.Web.Pages.Recipes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Reteta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Reteta.Nume" class="control-label"></label>
+                <input asp-for="Reteta.Nume" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Reteta.Nume" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reteta.Instructiuni" class="control-label"></label>
+                <input asp-for="Reteta.Instructiuni" class="form-control" />
+                <span asp-validation-for="Reteta.Instructiuni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reteta.TimpPreparare" class="control-label"></label>
+                <input asp-for="Reteta.TimpPreparare" class="form-control" />
+                <span asp-validation-for="Reteta.TimpPreparare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
