@@ -22,6 +22,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Reteta[0].TimpPreparare)
             </th>
+            <th>
+                Cost per porție
+            </th>
+            <th>
+                Profit per porție
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,6 +42,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimpPreparare)
+            </td>
+            <td>
+                    @{
+                        var cost = item.IngredientReteta?.Sum(ir => ir.CantitateNecesara * ir.Ingredient.PretAchizitie) ?? 0;
+                    }
+                    @cost.ToString("0.00") lei
+            </td>
+            <td>
+                    @{
+                        var profit = item.PretVanzare - (item.IngredientReteta?.Sum(ir => ir.CantitateNecesara * ir.Ingredient.PretAchizitie) ?? 0);
+                    }
+                    @profit.ToString("0.00") lei
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

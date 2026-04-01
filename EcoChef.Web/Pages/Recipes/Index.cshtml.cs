@@ -23,7 +23,10 @@ namespace EcoChef.Web.Pages.Recipes
 
         public async Task OnGetAsync()
         {
-            Reteta = await _context.Retete.ToListAsync();
+            Reteta = await _context.Retete
+                .Include(reteta => reteta.IngredientReteta)
+                    .ThenInclude(ingredient_reteta => ingredient_reteta.Ingredient)
+                .ToListAsync();
         }
     }
 }
