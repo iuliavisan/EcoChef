@@ -1,0 +1,56 @@
+﻿@page
+@model EcoChef.Web.Pages.Losses.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pierdere</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Pierdere.IngredientId" class="control-label"></label>
+                <select asp-for="Pierdere.IngredientId" class ="form-control" asp-items="ViewBag.IngredientId" aria-required="true"></select>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Pierdere.CantitatePierdere" class="control-label"></label>
+                <input asp-for="Pierdere.CantitatePierdere" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Pierdere.CantitatePierdere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Pierdere.MotivPierdere" class="control-label"></label>
+                <input asp-for="Pierdere.MotivPierdere" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Pierdere.MotivPierdere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pierdere.DataPierdere" class="control-label"></label>
+                <input asp-for="Pierdere.DataPierdere" class="form-control" />
+                <span asp-validation-for="Pierdere.DataPierdere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pierdere.PretPierdere" class="control-label"></label>
+                <input asp-for="Pierdere.PretPierdere" class="form-control" />
+                <span asp-validation-for="Pierdere.PretPierdere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

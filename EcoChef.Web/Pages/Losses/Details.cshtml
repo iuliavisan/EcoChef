@@ -1,0 +1,49 @@
+﻿@page
+@model EcoChef.Web.Pages.Losses.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Pierdere</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pierdere.Ingredient)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pierdere.Ingredient.Nume)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pierdere.CantitatePierdere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pierdere.CantitatePierdere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pierdere.MotivPierdere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pierdere.MotivPierdere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pierdere.DataPierdere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pierdere.DataPierdere)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pierdere.PretPierdere)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pierdere.PretPierdere)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Pierdere.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

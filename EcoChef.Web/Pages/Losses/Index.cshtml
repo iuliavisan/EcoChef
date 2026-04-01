@@ -1,0 +1,60 @@
+﻿@page
+@model EcoChef.Web.Pages.Losses.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pierdere[0].Ingredient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pierdere[0].CantitatePierdere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pierdere[0].MotivPierdere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pierdere[0].DataPierdere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pierdere[0].PretPierdere)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Pierdere) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredient.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantitatePierdere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MotivPierdere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPierdere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PretPierdere)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

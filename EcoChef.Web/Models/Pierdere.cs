@@ -10,14 +10,14 @@ namespace EcoChef.Web.Models
         [Display(Name = "Ingredient")]
 
         public int IngredientId { get; set; }
-        public Ingredient? Ingredient { get; set; }
+        public Ingredient? Ingredient { get; set; } //ia TOT din Ingredient
 
         [Required(ErrorMessage = "Cantitatea pierderii este obligatorie!")]
-        [Display(Name = "Cantitate:")]
+        [Display(Name = "Cantitate")]
         public decimal CantitatePierdere { get; set; }
 
         [Required(ErrorMessage ="Motivul pierderii este necesar!")]
-        [Display(Name = "Motivul pierderii:")]
+        [Display(Name = "Motivul pierderii")]
         public string MotivPierdere { get; set; }
 
         [DataType(DataType.Date)]
@@ -25,7 +25,7 @@ namespace EcoChef.Web.Models
         [Display(Name = "Data pierderii")]
         public DateTime DataPierdere{ get; set; }
 
-
+        [Display(Name = "Preț pierdere")]
         public decimal PretPierdere { get; set; }
     }
 }
