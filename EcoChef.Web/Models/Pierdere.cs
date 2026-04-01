@@ -6,8 +6,8 @@ namespace EcoChef.Web.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Numele produsului este obligatoriu!")]
-        [Display(Name = "Numele produsului de scăzut din stoc")]
+        [Required(ErrorMessage = "Ingredientul este obligatoriu!")]
+        [Display(Name = "Ingredient")]
 
         public int IngredientId { get; set; }
         public Ingredient? Ingredient { get; set; }

@@ -9,7 +9,7 @@ namespace EcoChef.Web.Models
 
         //legatura cu reteta
         public int RetetaId { get; set; } //nr retetei
-        public Reteta? Reteta { get; set; } //reyteta propriu-zisa, cu nume,timp,etc
+        public Reteta? Reteta { get; set; } //reteta propriu-zisa, cu nume,timp,etc
 
         //?-poate fi null
 

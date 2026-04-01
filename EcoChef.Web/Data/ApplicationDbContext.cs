@@ -13,5 +13,7 @@ namespace EcoChef.Web.Data
 
         public DbSet<Reteta> Retete { get; set; }
         public DbSet<IngredientReteta> IngredientRetete { get; set; }
+
+        public DbSet<Pierdere> Pierderi { get; set; }
     }
 }
