@@ -28,6 +28,12 @@
             <th>
                 Profit per porție
             </th>
+            <th>
+                Marjă profit
+            </th>
+            <th>
+                Preț meniu
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,6 +60,18 @@
                         var profit = item.PretVanzare - (item.IngredientReteta?.Sum(ir => ir.CantitateNecesara * ir.Ingredient.PretAchizitie) ?? 0);
                     }
                     @profit.ToString("0.00") lei
+            </td>
+            <td>
+                    @{
+                        var marja = cost > 0 ? Math.Round((profit / item.PretVanzare) * 100, 1) : 0;
+                    }
+                    @marja %
+            </td>
+            <td>
+                    @{
+                        var pret = profit + cost;
+                    }
+                    @Math.Round(pret,2).ToString("0.00") lei
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
