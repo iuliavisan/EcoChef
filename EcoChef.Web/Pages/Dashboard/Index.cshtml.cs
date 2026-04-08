@@ -15,7 +15,7 @@ namespace EcoChef.Web.Pages.Dashboard
             _context = context;
         }
 
-        public List <Ingredient> IngredienteExpira {  get; set; }
+        public List<Ingredient> IngredienteExpira { get; set; } = new List<Ingredient>();
 
         public async Task OnGetAsync()
         {

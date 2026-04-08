@@ -1,4 +1,37 @@
 ﻿@page
 @model EcoChef.Web.Pages.Dashboard.IndexModel
 @{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<h3><b>Ingrediente care expiră în 3 zile</b></h3>
+
+@if (Model.IngredienteExpira.Count == 0)
+{
+    <p class="text-success"> Niciun ingredient nu expiră curând!</p>
+}
+else
+{
+    <table class="table table-warning">
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Stoc curent</th>
+                <th>Data expirare</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var item in Model.IngredienteExpira)
+        {
+            <tr>
+                <td>@item.Nume</td>
+                <td>@item.StocCurent @item.UnitateMasura</td>
+                <td>@item.DataExpirare.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
 }
