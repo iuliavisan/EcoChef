@@ -15,5 +15,7 @@ namespace EcoChef.Web.Data
         public DbSet<IngredientReteta> IngredientRetete { get; set; }
 
         public DbSet<Pierdere> Pierderi { get; set; }
+        
+        public DbSet<Setari> Setari { get; set; }
     }
 }

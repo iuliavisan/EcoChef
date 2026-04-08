@@ -18,7 +18,7 @@ namespace EcoChef.Web.Models
 
         public ICollection<IngredientReteta>? IngredientReteta { get; set; }
 
-        public decimal PretVanzare { get; set; }
+        public decimal PretProductie { get; set; }
 
         public decimal MarjaProfit { get; set; }
     }// <> lista care contine obicecte de tip IngredientReteta
