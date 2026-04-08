@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EcoChef.Web.Data;
 using EcoChef.Web.Models;
-using EcoChef.Web.Migrations;
 
-namespace EcoChef.Web.Pages.Recipes
+namespace EcoChef.Web.Pages.Settings
 {
     public class IndexModel : PageModel
     {
@@ -20,18 +19,11 @@ namespace EcoChef.Web.Pages.Recipes
             _context = context;
         }
 
-        public IList<Reteta> Reteta { get;set; } = default!;
+        public IList<Setari> Setari { get;set; } = default!;
 
-        public decimal MarjaProfit { get; set; }
         public async Task OnGetAsync()
         {
-            var setari = await _context.Setari.FirstOrDefaultAsync();
-            MarjaProfit = setari?.MarjaProfit ?? 30m;
-
-            Reteta = await _context.Retete
-                .Include(reteta => reteta.IngredientReteta)
-                    .ThenInclude(ingredient_reteta => ingredient_reteta.Ingredient)
-                .ToListAsync();
+            Setari = await _context.Setari.ToListAsync();
         }
     }
 }

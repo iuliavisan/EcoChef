@@ -41,7 +41,7 @@
 @foreach (var item in Model.Reteta) {
             
                 var costProductie = item.IngredientReteta?.Sum(ir => ir.CantitateNecesara * ir.Ingredient.PretAchizitie) ?? 0;
-                var marjaProfit = 80m;
+                var marjaProfit = Model.MarjaProfit;
                 var pretMeniu = costProductie + (costProductie * marjaProfit / 100);
                 var profitPortie = pretMeniu - costProductie;
         <tr>
