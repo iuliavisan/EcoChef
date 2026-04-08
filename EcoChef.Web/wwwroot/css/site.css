@@ -1,22 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap');
+
+/* =============================================
+   ECOCHEF - Frutiger Aero Warm Theme
+   ============================================= */
+
+:root {
+    --green-deep: #1b4332;
+    --green-mid: #2d7a4f;
+    --green-bright: #43c67a;
+    --green-light: #a8e6be;
+    --blue-mid: #1976d2;
+    --blue-bright: #42a5f5;
+    --blue-light: #b3e5fc;
+    --red-mid: #e53935;
+    --red-light: #ffcdd2;
+    --glass-white: rgba(255,255,255,0.72);
+    --glass-border: rgba(255,255,255,0.92);
+    --shadow-green: rgba(45,122,79,0.22);
+    --shadow-blue: rgba(25,118,210,0.18);
+}
+
+/* =============================================
+   FUNDAL CU ORBS ANIMATE
+   ============================================= */
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: #d4edda;
+    min-height: 100vh;
+    margin-bottom: 60px;
+    color: var(--green-deep);
+    overflow-x: hidden;
+    position: relative;
+}
+
+    body::before,
+    body::after {
+        content: '';
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        z-index: 0;
+        animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+
+    body::before {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(67,198,122,0.35) 0%, rgba(178,235,242,0.2) 60%, transparent 80%);
+        top: -150px;
+        left: -100px;
+    }
+
+    body::after {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(66,165,245,0.3) 0%, rgba(200,230,201,0.15) 60%, transparent 80%);
+        bottom: -100px;
+        right: -80px;
+        animation-delay: -6s;
+        animation-direction: alternate-reverse;
+    }
+
+@keyframes floatOrb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(30px, 20px) scale(1.05);
+    }
+
+    100% {
+        transform: translate(-20px, 40px) scale(0.97);
+    }
+}
+
+/* Al treilea orb verde-albastru in centru */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* =============================================
+   NAVBAR - Glossy premium
+   ============================================= */
+
+.navbar {
+    background: linear-gradient( 180deg, rgba(255,255,255,0.97) 0%, rgba(232,248,237,0.95) 55%, rgba(220,242,255,0.93) 100% ) !important;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1.5px solid rgba(255,255,255,0.95) !important;
+    box-shadow: 0 2px 0 rgba(255,255,255,0.9) inset, 0 6px 30px rgba(45,122,79,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    padding: 18px 0 !important;
+    min-height: 78px;
+    position: relative;
+    z-index: 100;
+}
+
+    /* Linie decorativa subtire colorata sub navbar */
+    .navbar::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #43c67a 0%, #42a5f5 40%, #43c67a 70%, #66bb6a 100% );
+        background-size: 200% 100%;
+        animation: shimmerLine 4s linear infinite;
+    }
+
+@keyframes shimmerLine {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 200% 0%;
+    }
+}
+
+.navbar-brand {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.75rem;
+    background: linear-gradient(135deg, #2d7a4f 0%, #1565c0 50%, #43c67a 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.5px;
+    animation: gradientShift 6s ease infinite;
+    filter: drop-shadow(0 2px 6px rgba(45,122,79,0.25));
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.nav-link {
+    color: var(--green-deep) !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 14px;
+    padding: 8px 14px !important;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    letter-spacing: 0.2px;
+}
+
+    .nav-link:hover {
+        background: linear-gradient(135deg, rgba(67,198,122,0.18) 0%, rgba(66,165,245,0.15) 100% );
+        color: var(--green-deep) !important;
+        box-shadow: 0 4px 14px rgba(67,168,107,0.2), inset 0 1px 0 rgba(255,255,255,0.85), inset 0 -1px 0 rgba(0,0,0,0.04);
+        transform: translateY(-2px) scale(1.04);
+    }
+
+/* =============================================
+   TITLURI
+   ============================================= */
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    color: var(--green-deep);
+    font-weight: 900;
+    font-size: 2.4rem;
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 6px rgba(255,255,255,0.9), 0 4px 16px rgba(45,122,79,0.1);
+    position: relative;
+    display: inline-block;
+}
+
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #43c67a, #42a5f5);
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(67,198,122,0.4);
+    }
+
+h3, h4 {
+    font-family: 'Nunito', sans-serif;
+    color: var(--green-mid);
+    font-weight: 800;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.8);
+}
+
+/* =============================================
+   TABEL - Glassmorphism premium
+   ============================================= */
+
+.table {
+    background: rgba(255,255,255,0.68);
+    backdrop-filter: blur(16px) saturate(160%);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.98), inset 0 -1px 0 rgba(0,0,0,0.03);
+    border: 1.5px solid rgba(255,255,255,0.95);
+}
+
+    .table thead th {
+        background: linear-gradient(135deg, #43c67a 0%, #1e88e5 60%, #26c6da 100% );
+        color: white;
+        font-weight: 800;
+        font-family: 'Nunito', sans-serif;
+        border: none;
+        padding: 18px 22px;
+        font-size: 0.92rem;
+        letter-spacing: 0.4px;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        box-shadow: 0 3px 0 rgba(0,0,0,0.08) inset, 0 -1px 0 rgba(255,255,255,0.15) inset;
+    }
+
+    .table tbody tr {
+        border-bottom: 1px solid rgba(0,0,0,0.035);
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+        .table tbody tr:hover {
+            background: linear-gradient(90deg, rgba(67,198,122,0.1) 0%, rgba(66,165,245,0.07) 100% );
+            box-shadow: inset 3px 0 0 #43c67a, 0 2px 12px rgba(67,198,122,0.1);
+            transform: scale(1.003) translateX(2px);
+        }
+
+    .table tbody td {
+        padding: 15px 22px;
+        vertical-align: middle;
+        color: var(--green-deep);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .table tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 22px;
+    }
+
+    .table tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 22px;
+    }
+
+/* =============================================
+   BUTOANE - 3D Glossy
+   ============================================= */
+
+.btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    border-radius: 14px;
+    padding: 10px 26px;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.3px;
+}
+
+    /* Shimmer effect pe hover */
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.4s ease;
+    }
+
+    .btn:hover::before {
+        left: 150%;
+    }
+
+.btn-primary {
+    background: linear-gradient(160deg, #5dd88a 0%, #2d9e5f 40%, #1e7a45 100%);
+    border: none;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(45,122,79,0.4), 0 2px 0 rgba(255,255,255,0.3) inset, 0 -3px 0 rgba(0,0,0,0.15) inset;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(160deg, #6ee49a 0%, #38b870 40%, #256b3a 100%);
+        box-shadow: 0 10px 28px rgba(45,122,79,0.5), 0 2px 0 rgba(255,255,255,0.35) inset, 0 -3px 0 rgba(0,0,0,0.15) inset;
+        transform: translateY(-3px) scale(1.03);
+        color: white;
+    }
+
+    .btn-primary:active {
+        transform: translateY(0) scale(0.98);
+        box-shadow: 0 2px 8px rgba(45,122,79,0.35);
+    }
+
+.btn-secondary {
+    background: linear-gradient(160deg, #6ec6ff 0%, #1976d2 40%, #0d47a1 100%);
+    border: none;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(25,118,210,0.4), 0 2px 0 rgba(255,255,255,0.3) inset, 0 -3px 0 rgba(0,0,0,0.15) inset;
+}
+
+    .btn-secondary:hover {
+        background: linear-gradient(160deg, #82d4ff 0%, #2196f3 40%, #1565c0 100%);
+        box-shadow: 0 10px 28px rgba(25,118,210,0.5), 0 2px 0 rgba(255,255,255,0.35) inset;
+        transform: translateY(-3px) scale(1.03);
+        color: white;
+    }
+
+.btn-danger {
+    background: linear-gradient(160deg, #ff7875 0%, #e53935 40%, #b71c1c 100%);
+    border: none;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    box-shadow: 0 6px 20px rgba(229,57,53,0.4), 0 2px 0 rgba(255,255,255,0.3) inset, 0 -3px 0 rgba(0,0,0,0.15) inset;
+}
+
+    .btn-danger:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 10px 28px rgba(229,57,53,0.5);
+        color: white;
+    }
+
+/* =============================================
+   LINKURI
+   ============================================= */
+
+a {
+    color: var(--green-mid);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.18s ease;
+}
+
+    a:hover {
+        color: var(--blue-mid);
+        filter: drop-shadow(0 0 6px rgba(21,101,192,0.3));
+    }
+
+/* =============================================
+   FORMULARE - Glossy inputs
+   ============================================= */
+
+.form-control, .form-select {
+    border-radius: 14px;
+    border: 1.5px solid rgba(67,198,122,0.28);
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(8px);
+    padding: 11px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: var(--green-deep);
+    transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) inset, 0 1px 0 rgba(255,255,255,0.9);
+    font-size: 0.95rem;
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: #43c67a;
+        box-shadow: 0 0 0 3px rgba(67,198,122,0.18), 0 6px 16px rgba(67,198,122,0.12), 0 2px 8px rgba(0,0,0,0.05) inset;
+        background: rgba(255,255,255,0.97);
+        transform: translateY(-2px) scale(1.01);
+        outline: none;
+    }
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.control-label, label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    color: var(--green-mid);
+    margin-bottom: 7px;
+    display: block;
+    font-size: 0.92rem;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+/* =============================================
+   CARD - Premium glass
+   ============================================= */
+
+.card {
+    background: linear-gradient(160deg, rgba(255,255,255,0.88) 0%, rgba(240,252,244,0.82) 100% );
+    border: 1.5px solid rgba(255,255,255,0.95);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03);
+    padding: 28px;
+    backdrop-filter: blur(16px);
+}
+
+/* =============================================
+   ROW FORMULAR - Container frumos
+   ============================================= */
+
+.row .col-md-4 {
+    background: linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(232,248,237,0.78) 100% );
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.98), inset 0 -1px 0 rgba(0,0,0,0.02);
+    border: 1.5px solid rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+}
+
+/* =============================================
+   ALERTE & BADGES
+   ============================================= */
+
+.text-success {
+    color: var(--green-mid) !important;
+    font-weight: 800;
+    filter: drop-shadow(0 1px 3px rgba(45,122,79,0.2));
+}
+
+.text-danger {
+    color: #c62828 !important;
+    font-weight: 800;
+}
+
+.table-warning {
+    background: linear-gradient(90deg, rgba(255,236,153,0.35), rgba(255,224,130,0.25) ) !important;
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+
+.footer {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(16px);
+    border-top: 1.5px solid rgba(255,255,255,0.8) !important;
+    color: var(--green-mid);
+    font-weight: 700;
+    padding: 18px 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 1;
+}
+
+/* =============================================
+   SCROLLBAR CUSTOM
+   ============================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(200,230,201,0.3);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #43c67a, #42a5f5);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(67,198,122,0.3);
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #2d7a4f, #1976d2);
+    }
+
+/* =============================================
+   SELECTIE TEXT
+   ============================================= */
+
+::selection {
+    background: rgba(67,198,122,0.3);
+    color: var(--green-deep);
+}
+
+/* =============================================
+   FONT SIZE
+   ============================================= */
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* =============================================
+   ANIMATIE PAGE LOAD
+   ============================================= */
+
+main {
+    animation: fadeInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
 
-body {
-  margin-bottom: 60px;
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
