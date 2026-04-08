@@ -17,5 +17,6 @@ namespace EcoChef.Web.Data
         public DbSet<Pierdere> Pierderi { get; set; }
         
         public DbSet<Setari> Setari { get; set; }
+        public DbSet<IstoricGatire> IstoricGatire { get; set; }
     }
 }

@@ -25,5 +25,65 @@
     </div>
 
     <button type="submit">Gatește</button>
-
 </form>
+
+
+    <hr />
+    <h3>Istoric Gătire</h3>
+
+    <div style="margin-bottom: 16px;">
+    <a asp-page="./Index" asp-route-data="@Model.DataSelectata.AddDays(-1).ToString("MM-dd-yyyy")">← Ziua anterioară</a>
+        <strong style="margin: 0 16px;">@Model.DataSelectata.ToString("dd MM yyyy")</strong>
+        
+        @if(Model.DataSelectata.Date < DateTime.Today)
+        {
+        <a asp-page="./Index" asp-route-data="@Model.DataSelectata.AddDays(1).ToString("MM-dd-yyyy")">Ziua următoare →</a>
+        }
+
+    </div>
+
+@if(Model.Istoric.Count == 0)
+{
+    <p class="text-success">Nicio gătire înregistrată în această zi.</p>
+}
+else
+{
+    var totalCost = Model.Istoric.Sum(i => i.CostTotal);
+    var totalVanzare = Model.Istoric.Sum(i => i.PretVanzareTotal);
+    var totalProfit = totalVanzare - totalCost;
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Rețetă</th>
+                <th>Nr. Porții</th>
+                <th>Cost Total</th>
+                <th>Preț Vânzare</th>
+                <th>Profit</th>
+                <th>Ora</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var item in Model.Istoric)
+            {
+                var profit = item.PretVanzareTotal - item.CostTotal;
+
+                <tr>
+                    <td>@item.Reteta.Nume</td>
+                    <td>@item.NrPortii portii</td>
+                    <td>@item.CostTotal.ToString("0.00") lei</td>
+                    <td>@item.PretVanzareTotal.ToString("0.00") lei</td>
+                    <td>@profit.ToString("0.00") lei</td>
+                    <td>@item.DataGatirii.ToString("HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+ 
+    <p><strong>Total zi: Cost @totalCost.ToString("0.00") lei</strong></p>
+    <p><strong>Vanzari @totalVanzare.ToString("0.00") lei</strong></p>
+    <p><strong>Profit @totalProfit.ToString("0.00") lei</strong></p>
+}
+

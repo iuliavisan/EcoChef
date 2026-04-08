@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using EcoChef.Web.Models;
 using Microsoft.EntityFrameworkCore;
+using EcoChef.Web.Migrations;
 
 namespace EcoChef.Web.Pages.Cooking
 {
@@ -18,9 +19,19 @@ namespace EcoChef.Web.Pages.Cooking
         }
 
         public List<Reteta> Retete { get; set; } = new List<Reteta>(); //creeaza o lista Reteta din Retete
-        public void OnGet()//fara argumente deoarece afiseaza toate retetele
+        public List<IstoricGatire> Istoric { get; set; }
+        public DateTime DataSelectata { get; set; } = DateTime.Today;
+        public void OnGet(DateTime? data)//fara argumente deoarece afiseaza toate retetele
         {
+            DataSelectata = data ?? DateTime.Today;
+        
             Retete = _context.Retete.ToList(); //pui elementele din BD din Retete(tabelul din context) in lista creata
+
+            Istoric = _context.IstoricGatire
+                .Where(g => g.DataGatirii.Date == DataSelectata.Date)
+                .Include(g => g.Reteta)
+                .OrderByDescending(g => g.DataGatirii)
+                .ToList();
         }
 
         //onpost primeste datele dupa ce se apasa submit
@@ -51,6 +62,10 @@ namespace EcoChef.Web.Pages.Cooking
 
             if (!ModelState.IsValid)
             {
+                Istoric = _context.IstoricGatire
+                    .Where(g => g.DataGatirii.Date == DateTime.Today)
+                    .Include(g => g.Reteta)
+                    .ToList();
                 return Page();
             }
 
@@ -62,6 +77,28 @@ namespace EcoChef.Web.Pages.Cooking
             }
 
             _context.SaveChanges();
+            var setari = _context.Setari.FirstOrDefault();
+            var marja = setari?.MarjaProfit ?? 30m;
+
+            var costTotal = ingrediente.Sum(ir => ir.CantitateNecesara * NrPortii * ir.Ingredient.PretAchizitie);
+            var pretVanzareTotal = costTotal + (costTotal * marja / 100);
+
+            var gatire = new IstoricGatire
+            {
+                RetetaId = RetetaId,
+                NrPortii = NrPortii,
+                DataGatirii = DateTime.Now,
+                CostTotal = costTotal,
+                PretVanzareTotal = pretVanzareTotal
+            };
+
+            _context.IstoricGatire.Add(gatire);
+            _context.SaveChanges();
+
+            Istoric = _context.IstoricGatire
+                .Where(g => g.DataGatirii.Date == DateTime.Today)
+                .Include(g => g.Reteta)
+                .ToList();
 
             return Page(); //ramai pe aceeasi pagina
         }
