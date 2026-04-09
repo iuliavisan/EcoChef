@@ -22,11 +22,11 @@ namespace EcoChef.Web.Pages.Reports
 
         public async Task OnGetAsync()
         {
-            var primeLuna = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var inceputLuna = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
             //cele mai gatite retete
             var reteteGatite = await _context.IstoricGatire
-                .Where(g => g.DataGatirii >= primeLuna)
+                .Where(g => g.DataGatirii >= inceputLuna)
                 .Include(g => g.Reteta)
                 .GroupBy(g => g.Reteta.Nume)
                 .Select(g => new
@@ -40,7 +40,7 @@ namespace EcoChef.Web.Pages.Reports
             //cele mai mari pierderi
 
             var pierderi = await _context.Pierderi
-                .Where(p => p.DataPierdere >= primeLuna)
+                .Where(p => p.DataPierdere >= inceputLuna)
                 .Include(p => p.Ingredient)
                 .GroupBy(p => p.Ingredient.Nume)
                 .Select(g => new
@@ -53,7 +53,7 @@ namespace EcoChef.Web.Pages.Reports
 
             //totaluri
             var istoricLuna = await _context.IstoricGatire
-                .Where(g => g.DataGatirii >= primeLuna)
+                .Where(g => g.DataGatirii >= inceputLuna)
                 .ToListAsync();
 
             TotalProfit = istoricLuna.Sum(g => g.PretVanzareTotal - g.CostTotal);

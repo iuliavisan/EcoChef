@@ -10,10 +10,10 @@
 <form method="post">
     <div>
         <label>Rețetă:</label>
-        <select name="RetetaId"> <!--select is dropdown menu-->
+        <select name="RetetaId" id="retetaSelect"> <!--select is dropdown menu-->
             @foreach (var reteta in Model.Retete)
             {
-                <option value="@reteta.Id">@reteta.Nume</option> //option sunt optiunile din dropdown
+                <option value="@reteta.Id" data-timp="@reteta.TimpPreparare">@reteta.Nume</option> //option sunt optiunile din dropdown
             }
         </select>
     </div>
@@ -25,7 +25,16 @@
     </div>
 
     <button type="submit">Gatește</button>
+    
+    <div id="timerContainer" style="display:none; margin-top: 20px;">
+        <h3>Se pregătește...</h3>
+        <p id="retetaNume" style="font-weight: 700; color: #2d7a4f;"></p>
+        <p id="timerDisplay" style="font-size: 3rem; font-weight:900; color: #1b4332;"></p>
+        <p style="color: #666;">minute rămase</p>
+    </div>
 </form>
+
+
 
 
     <hr />

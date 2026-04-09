@@ -1,4 +1,99 @@
 ﻿@page
 @model EcoChef.Web.Pages.Reports.IndexModel
 @{
+    ViewData["Title"] = "Rapoarte";
+}
+
+<h1>Rapoarte Lunare</h1>
+<p style="color: #2d7a4f; font-weight: 700;">
+    @DateTime.Now.ToString("MMMM yyyy")
+</p>
+
+<!-- Carduri totaluri -->
+<div style="display: flex; gap: 24px; margin-bottom: 32px; flex-wrap: wrap;">
+    <div class="card" style="flex: 1; min-width: 200px; text-align: center;">
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">Total Profit Luna</p>
+        <p style="font-size: 2rem; font-weight: 900; color: #2d7a4f; margin: 0;">
+            @Model.TotalProfit.ToString("0.00") lei
+        </p>
+    </div>
+    <div class="card" style="flex: 1; min-width: 200px; text-align: center;">
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 8px;">Total Pierderi Luna</p>
+        <p style="font-size: 2rem; font-weight: 900; color: #c62828; margin: 0;">
+            @Model.TotalPierderi.ToString("0.00") lei
+        </p>
+    </div>
+</div>
+
+<!-- Grafice -->
+<div style="display: flex; gap: 24px; flex-wrap: wrap;">
+    <div class="card" style="flex: 1; min-width: 300px;">
+        <h3>Cele mai gătite rețete</h3>
+        <canvas id="reteteChart"></canvas>
+    </div>
+    <div class="card" style="flex: 1; min-width: 300px;">
+        <h3>Cele mai mari pierderi</h3>
+        <canvas id="pierderiChart"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Date din C# -> JavaScript
+        const reteteData = @Html.Raw(Model.ReteteJson);
+        const pierderiData = @Html.Raw(Model.PierderiJson);
+
+        // Grafic retete
+        new Chart(document.getElementById('reteteChart'), {
+            type: 'bar',
+            data: {
+                labels: reteteData.map(r => r.Nume),
+                datasets: [{
+                    label: 'Porții gătite',
+                    data: reteteData.map(r => r.TotalPortii),
+                    backgroundColor: [
+                        'rgba(67, 198, 122, 0.7)',
+                        'rgba(66, 165, 245, 0.7)',
+                        'rgba(255, 183, 77, 0.7)',
+                        'rgba(149, 117, 205, 0.7)',
+                        'rgba(77, 182, 172, 0.7)',
+                    ],
+                    borderRadius: 8,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+            }
+        });
+
+        // Grafic pierderi
+        new Chart(document.getElementById('pierderiChart'), {
+            type: 'bar',
+            data: {
+                labels: pierderiData.map(p => p.Nume),
+                datasets: [{
+                    label: 'Pierdere (lei)',
+                    data: pierderiData.map(p => p.TotalPierdere),
+                    backgroundColor: [
+                        'rgba(229, 57, 53, 0.7)',
+                        'rgba(255, 112, 67, 0.7)',
+                        'rgba(255, 183, 77, 0.7)',
+                        'rgba(149, 117, 205, 0.7)',
+                        'rgba(77, 182, 172, 0.7)',
+                    ],
+                    borderRadius: 8,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
 }
