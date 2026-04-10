@@ -20,12 +20,18 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
         }
 
         public IList<IngredientReteta> IngredientReteta { get;set; } = default!;
-
+        public Dictionary<string, List<IngredientReteta>> IngredientePeRetete { get; set; } = new();
         public async Task OnGetAsync()
         {
             IngredientReteta = await _context.IngredientRetete
                 .Include(i => i.Ingredient)
-                .Include(i => i.Reteta).ToListAsync();
+                .Include(i => i.Reteta)
+                .OrderBy(i => i.Reteta.Nume)
+                .ToListAsync();
+
+            IngredientePeRetete = IngredientReteta
+                .GroupBy(i => i.Reteta.Nume)
+                .ToDictionary(g => g.Key, g=>g.ToList());
         }
     }
 }

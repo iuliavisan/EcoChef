@@ -21,12 +21,15 @@ namespace EcoChef.Web.Pages.Losses
 
         public IList<Pierdere> Pierdere { get;set; } = default!;
         public Dictionary<DateTime, List<Pierdere>> PierderiPeZile { get; set; } = new();
+        public DateTime DataSelectata { get; set; } = DateTime.Today;
 
-
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(DateTime? data)
         {
+            DataSelectata = data ?? DateTime.Today;
+
             Pierdere = await _context.Pierderi
                 .Include(p => p.Ingredient)
+                .Where(p=> p.DataPierdere.Date == DataSelectata.Date)
                 .OrderByDescending(p=> p.DataPierdere)
                 .ToListAsync();
 

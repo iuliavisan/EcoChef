@@ -3,9 +3,28 @@
 
 @{
     ViewData["Title"] = "Pierderi";
+    var ziuaAnterioara = Model.DataSelectata.AddDays(-1).ToString("yyyy-MM-dd");
+    var ziuaUrmatoare = Model.DataSelectata.AddDays(+1).ToString("yyyy-MM-dd");
 }
 
 <h1>Pierderi</h1>
+
+<div style ="display: flex; align-items: center; gap:16px; margin-bottom: 24px;">
+    <a asp-page="./Index"
+        asp-route-data ="@ziuaAnterioara"
+        class="btn btn-secondary">Ziua anterioară</a>
+
+    <h3 style="margin: 0; color: #2d7a4f;"></h3>
+        @Model.DataSelectata.ToString("dd MMMM yyyy")
+    </h3>
+
+    @if(Model.DataSelectata.Date < DateTime.Today)
+    {
+        <a asp-page="./Index"
+            asp-route-data ="@ziuaUrmatoare"
+            class="btn btn-secondary">Ziua următoare</a>
+    }
+</div>
 
 <p>
     <a asp-page="Create">Create New</a>

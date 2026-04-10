@@ -10,39 +10,53 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<input type="text" id="cautare" placeholder="Caută rețetă"
+       class="form-control" style="margin-bottom: 16px; max-width: 400px;"
+       onkeyup="filtreaza()" />
+
+@foreach(var reteta in Model.IngredientePeRetete)
+{
+    
+<div class="card" style="margin-bottom:24px;">
+    <h4 style="margin-bottom: 16px;">@reteta.Key</h4>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IngredientReteta[0].Reteta)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IngredientReteta[0].Ingredient)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IngredientReteta[0].CantitateNecesara)
-            </th>
+            <th>Ingredient</th>
+            <th>Cantitate</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.IngredientReteta) { //pentru fiecare rand din IngredientReteta fa un table row
+    @foreach (var item in reteta.Value) { //pentru fiecare rand din IngredientReteta fa un table row
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reteta.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredient.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => @item.CantitateNecesara) @item.Ingredient.UnitateMasura
-            </td>
+            <td>@item.Ingredient.Nume</td>
+            <td>@item.CantitateNecesara @item.Ingredient.UnitateMasura</td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
+
     </tbody>
 </table>
+</div>
+}
+
+@section Scripts {
+    <script>
+        function filtreaza() {
+            const text = document.getElementById('cautare').value.toLowerCase();
+            const randuri = document.querySelectorAll('tbody tr');
+
+            randuri.forEach(rand => {
+                const continut = rand.textContent.toLowerCase();
+                rand.style.display = continut.includes(text) ? '' : 'none';
+            });
+        }
+    </script>
+}
