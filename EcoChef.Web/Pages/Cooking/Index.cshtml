@@ -70,6 +70,7 @@ else
                 <th>Preț Vânzare</th>
                 <th>Profit</th>
                 <th>Ora</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -85,6 +86,12 @@ else
                     <td>@item.PretVanzareTotal.ToString("0.00") lei</td>
                     <td>@profit.ToString("0.00") lei</td>
                     <td>@item.DataGatirii.ToString("HH:mm")</td>
+                    <td>
+                        <form method="post" asp-page-handler="Sterge" asp-route-id="@item.Id">
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Sigur anulezi această comandă?')">Anulează comandă</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
