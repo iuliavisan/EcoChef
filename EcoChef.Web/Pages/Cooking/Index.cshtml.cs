@@ -102,5 +102,31 @@ namespace EcoChef.Web.Pages.Cooking
 
             return Page(); //ramai pe aceeasi pagina
         }
+
+        public async Task<IActionResult> OnPostStergeAsync(int id)
+        {
+            var gatire = await _context.IstoricGatire
+                .Include(g => g.Reteta)
+                .FirstOrDefaultAsync(g => g.Id == id);
+
+            if (gatire == null) return NotFound();
+
+            //pt a readauga stocul:
+            var ingrediente = await _context.IngredientRetete
+                .Where(ir => ir.RetetaId == gatire.RetetaId)
+                .Include(ir => ir.Ingredient)
+                .ToListAsync();
+
+            foreach (var ir in ingrediente)
+            {
+                ir.Ingredient.StocCurent += ir.CantitateNecesara * gatire.NrPortii;
+
+            }
+
+            _context.IstoricGatire.Remove(gatire);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage(); //reincarca pagina curenta dupa stergere
+        }
     }
 }
