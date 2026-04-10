@@ -43,6 +43,19 @@
                 <input asp-for="Ingredient.DataExpirare" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Ingredient.DataExpirare" class="text-danger"></span>
             </div>
+            <span class="text-danger">*</span>
+            <div class="form-group">
+                <label asp-for="Ingredient.Categorie" class="control-label"></label>
+                <select asp-for="Ingredient.Categorie" class="form-control">
+                    <option value="Lactate">Lactate</option>
+                    <option value="Carne și Pește">Carne și Pește</option>
+                    <option value="Legume și Fructe">Legume și Fructe</option>
+                    <option value="Cereale si Făinoase">Cereale și Făinoase</option>
+                    <option value="Condimente">Condimente</option>
+                    <option value="Băuturi">Băuturi</option>
+                    <option value="Altele">Altele</option>
+                </select>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

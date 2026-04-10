@@ -6,7 +6,24 @@
 
 <h1>Rapoarte Lunare</h1>
 <p style="color: #2d7a4f; font-weight: 700;">
-    @DateTime.Now.ToString("MMMM yyyy")
+    <div style="display: flex; align-items: center; gap:16px; margin-bottom: 24px;">
+        <a asp-page="./Index"
+        asp-route-an ="@Model.LunaSelectata.AddMonths(-1).Year"
+        asp-route-luna="@Model.LunaSelectata.AddMonths(-1).Month"
+        class="btn btn-secondary">Luna anterioară</a>
+
+        <h2 style="margin: 0; color: #2d7a4f;">
+            @Model.LunaSelectata.ToString("MMMM yyyy")
+        </h2>
+
+        @if (Model.LunaSelectata.Month < DateTime.Now.Month || Model.LunaSelectata.Year < DateTime.Now.Year)
+        {
+            <a asp-page="./Index"
+            asp-route-an="@Model.LunaSelectata.AddMonths(1).Year"
+            asp-route-luna ="@Model.LunaSelectata.AddMonths(1).Month"
+            class="btn btn-secondary">Luna următoare</a>
+        }
+    </div>
 </p>
 
 <!-- Carduri totaluri -->

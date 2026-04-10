@@ -27,5 +27,8 @@ namespace EcoChef.Web.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DataExpirare { get; set; }
+
+        [Display(Name = "Categorie")]
+        public string Categorie { get; set; } = "Altele";
     }
 }

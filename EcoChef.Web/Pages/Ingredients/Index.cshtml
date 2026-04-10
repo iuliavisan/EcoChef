@@ -10,45 +10,34 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<!--bara de cautare-->
+<input type="text" id="cautare" placeholder="Caută ingredient"
+    class="form-control" style="margin-bottom: 16px; max-width: 400px;"
+    onkeyup="filtreaza()" />
+
+@foreach(var categorie in Model.IngredientePeCategorie)
+{
+    <div class="card" style="margin-bottom: 24px;">
+        <h4 style="margin-bottom: 16px;">@categorie.Key</h4>
+<table class="table" id="tabel_@categorie.Key.Replace(" ", "_")">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].Nume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].UnitateMasura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].PretAchizitie)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].StocCurent)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].DataExpirare)
-            </th>
+            <th>Nume</th>
+            <th>Unitate măsură</th>
+            <th>Preț Achiziție</th>
+            <th>Stoc curent</th>
+            <th>Data expirare</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ingredient) {
+@foreach (var item in categorie.Value) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitateMasura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PretAchizitie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StocCurent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataExpirare)
-            </td>
+            <td>@item.Nume</td>
+            <td>@item.UnitateMasura</td>
+            <td>@item.PretAchizitie lei</td>
+            <td>@item.StocCurent @item.UnitateMasura</td>
+            <td>@item.DataExpirare.ToString("dd/MM/yyyy")</td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
@@ -58,3 +47,19 @@
 }
     </tbody>
 </table>
+</div>
+}
+
+@section Scripts {
+    <script>
+        function filtreaza() {
+            const text = document.getElementById('cautare').value.toLowerCase();
+            const randuri = document.querySelectorAll('tbody tr');
+
+            randuri.forEach(rand => {
+                const continut = rand.textContent.toLowerCase();
+                rand.style.display = continut.includes(text) ? '' : 'none';
+            });
+        }
+    </script>
+}

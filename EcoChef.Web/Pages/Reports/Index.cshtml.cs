@@ -19,14 +19,17 @@ namespace EcoChef.Web.Pages.Reports
         public string PierderiJson {  get; set; }= "[]";
         public decimal TotalProfit { get; set; }
         public decimal TotalPierderi { get; set; }
+        public DateTime LunaSelectata { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? an, int? luna)
         {
-            var inceputLuna = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var azi = DateTime.Now;
+            LunaSelectata = new DateTime(an ?? azi.Year, luna ?? azi.Month, 1);
+            var sfarsitLuna = LunaSelectata.AddMonths(1);
 
             //cele mai gatite retete
             var reteteGatite = await _context.IstoricGatire
-                .Where(g => g.DataGatirii >= inceputLuna)
+                .Where(g => g.DataGatirii >= LunaSelectata && g.DataGatirii < sfarsitLuna)
                 .Include(g => g.Reteta)
                 .GroupBy(g => g.Reteta.Nume)
                 .Select(g => new
@@ -40,7 +43,7 @@ namespace EcoChef.Web.Pages.Reports
             //cele mai mari pierderi
 
             var pierderi = await _context.Pierderi
-                .Where(p => p.DataPierdere >= inceputLuna)
+                .Where(p => p.DataPierdere >= LunaSelectata && p.DataPierdere < sfarsitLuna)
                 .Include(p => p.Ingredient)
                 .GroupBy(p => p.Ingredient.Nume)
                 .Select(g => new
@@ -53,7 +56,7 @@ namespace EcoChef.Web.Pages.Reports
 
             //totaluri
             var istoricLuna = await _context.IstoricGatire
-                .Where(g => g.DataGatirii >= inceputLuna)
+                .Where(g => g.DataGatirii >= LunaSelectata && g.DataGatirii < sfarsitLuna)
                 .ToListAsync();
 
             TotalProfit = istoricLuna.Sum(g => g.PretVanzareTotal - g.CostTotal);

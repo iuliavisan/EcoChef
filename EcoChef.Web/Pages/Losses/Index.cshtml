@@ -2,59 +2,53 @@
 @model EcoChef.Web.Pages.Losses.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pierderi";
 }
 
-<h1>Index</h1>
+<h1>Pierderi</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+@foreach (var zi in Model.PierderiPeZile)
+{
+    <div class="card" style="margin-bottom: 24px;">
+        <h4 style="margin-bottom: 16px;">
+            @zi.Key.ToString("dd MMMM yyyy")
+        <span style="font-size: 0.85rem; color: #666; font-weight:600; margin-left: 12px;">
+        </span>
+        </h4>
+
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Pierdere[0].Ingredient)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pierdere[0].CantitatePierdere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pierdere[0].MotivPierdere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pierdere[0].DataPierdere)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pierdere[0].PretPierdere)
-            </th>
+            <th>Ingredient</th>
+            <th>Cantitate</th>
+            <th>Motiv</th>
+            <th>Valoare</th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Pierdere) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingredient.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantitatePierdere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MotivPierdere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPierdere)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PretPierdere)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    @foreach (var item in zi.Value)
+    {
+    <tr>
+        <td>@item.Ingredient.Nume</td>
+        <td>@item.CantitatePierdere @item.Ingredient.UnitateMasura</td>
+        <td>@item.MotivPierdere</td>
+        <td>@item.PretPierdere.ToString("0.00") lei</td>
+        <td>
+           <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+           <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+           <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+        </td>
+    </tr>
+    }
+
     </tbody>
 </table>
+</div>
+}

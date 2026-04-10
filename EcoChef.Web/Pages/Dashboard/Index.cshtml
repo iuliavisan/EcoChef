@@ -34,4 +34,31 @@ else
         }
         </tbody>
     </table>
+
+    <h3><b>Rețete recomandate</b></h3>
+    <p style="color: #666;">Folosește ingredientele care expiră curând!</p>
+
+    @if (Model.ReteteRecomandate.Count == 0)
+    {
+        <p class ="text-succes">Nicio recomandare momentan.</p>
+    }
+    else
+    {
+        @foreach (var reteta in Model.ReteteRecomandate)
+        {
+            <div class ="card" style="margin-bottom: 16px;">
+                <h4>@reteta.Nume</h4>
+                <p style="color: #666; font-size: 0.9rem;">Ingrediente care expiră folosite în această rețetă:</p>
+                @foreach (var ir in reteta.IngredientReteta
+                
+                    .Where(ir => Model.IngredienteExpira.Select(i => i.Id).Contains(ir.IngredientId)))
+                    {
+                        <span style="background: rgba(255,200,0,0.2); padding:4px 10px; border-radius: 8px; margin-right: 8px; font-weight:700;">
+                            @ir.Ingredient.Nume
+                        </span>
+                    }
+                
+            </div>
+        }
+    }
 }
