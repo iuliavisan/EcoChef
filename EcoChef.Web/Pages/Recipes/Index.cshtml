@@ -10,6 +10,11 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<input type="text" id="cautare" placeholder="Caută rețetă"
+       class="form-control" style="margin-bottom: 16px; max-width: 400px;"
+       onkeyup="filtreaza()" />
+
 <table class="table">
     <thead>
         <tr>
@@ -75,3 +80,17 @@
 }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        function filtreaza() {
+            const text = document.getElementById('cautare').value.toLowerCase();
+            const randuri = document.querySelectorAll('tbody tr');
+
+            randuri.forEach(rand => {
+                const continut = rand.textContent.toLowerCase();
+                rand.style.display = continut.includes(text) ? '' : 'none';
+            });
+        }
+    </script>
+}
