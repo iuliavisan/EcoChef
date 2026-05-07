@@ -22,7 +22,9 @@ namespace EcoChef.Web.Pages.Losses
         public IActionResult OnGet()
         {
         ViewData["IngredientId"] = new SelectList(_context.Ingrediente, "Id", "Nume");
-            return Page();
+        ViewData["Unitati"] = _context.Ingrediente
+            .ToDictionary(i => i.Id, i => i.UnitateMasura);
+        return Page();
         }
 
         [BindProperty] //puteai face si onpost cu argumente dar aici ai mai multe campuri de adus

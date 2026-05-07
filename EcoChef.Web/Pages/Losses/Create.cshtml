@@ -16,13 +16,19 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Pierdere.IngredientId" class="control-label"></label>
-                <select asp-for="Pierdere.IngredientId" class ="form-control" asp-items="ViewBag.IngredientId" aria-required="true"></select>
+                <select asp-for="Pierdere.IngredientId" class ="form-control" 
+                    asp-items="ViewBag.IngredientId" 
+                    aria-required="true"
+                    id="ingredientSelect"
+                    onchange="aratUnitate()">
+                </select>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Pierdere.CantitatePierdere" class="control-label"></label>
                 <input asp-for="Pierdere.CantitatePierdere" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Pierdere.CantitatePierdere" class="text-danger"></span>
+                <span id="unitateSpan" style="font-weight: 700; color: #2d7a4f; margin-left: 8px;"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -49,4 +55,16 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const unitati = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewData["Unitati"]));
+
+        function aratUnitate(){
+            const id = document.getElementById('ingredientSelect').value;
+            console.log('id selectat:', id);
+            console.log('unitati:', unitati);
+            const unitate = unitati[parseInt(id)] || '';
+            document.getElementById('unitateSpan').textContent = unitate;
+        }
+        aratUnitate();
+    </script>
 }

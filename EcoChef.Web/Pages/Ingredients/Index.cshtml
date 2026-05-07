@@ -14,6 +14,17 @@
 <input type="text" id="cautare" placeholder="Caută ingredient"
     class="form-control" style="margin-bottom: 16px; max-width: 400px;"
     onkeyup="filtreaza()" />
+<select id="filtruCategorie" class="form-control" style="max-width: 200px;" onchange="filtreaza()">
+    <option value="">Toate categoriile</option>
+    <option value="Lactate">Lactate</option>
+    <option value="Ouă">Ouă</option>
+    <option value="Carne și Pește">Carne și Peste</option>
+    <option value="Legume și Fructe">Legume și fructe</option>
+    <option value="Cereale și Făinoase">Cereale și Făinoase</option>
+    <option value="Condimente">Condimente</option>
+    <option value="Băuturi">Băuturi</option>
+    <option value="Altele">Altele</option>
+</select>
 
 @foreach(var categorie in Model.IngredientePeCategorie)
 {
@@ -54,11 +65,30 @@
     <script>
         function filtreaza() {
             const text = document.getElementById('cautare').value.toLowerCase();
-            const randuri = document.querySelectorAll('tbody tr');
+            const categorie = document.getElementById('filtruCategorie').value.toLowerCase();
+            const carduri = document.querySelectorAll('.card');
 
-            randuri.forEach(rand => {
-                const continut = rand.textContent.toLowerCase();
-                rand.style.display = continut.includes(text) ? '' : 'none';
+            carduri.forEach(card => {
+                const numeCategorie = card.querySelector('h4').textContent.toLowerCase();
+
+                if(categorie && !numeCategorie.includes(categorie)){
+                    card.style.display='none';
+                    return;
+                }
+
+                const randuri=card.querySelectorAll('tbody tr');
+                let vizibile=0;
+
+                randuri.forEach(rand => {
+                    const continut = rand.textContent.toLowerCase();
+                    if(continut.includes(text)){
+                        rand.style.display = '';
+                        vizibile++;
+                    }else{
+                        rand.style.display = 'none';
+                    }
+                });
+                card.style.display = vizibile==0 ? 'none' : '';
             });
         }
     </script>

@@ -20,6 +20,8 @@ namespace EcoChef.Web.Pages.Recipes
         }
 
         public Reteta Reteta { get; set; } = default!;
+        public List<IngredientReteta> Ingrediente { get; set; } = new();
+        public decimal MarjaProfit { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,15 +30,21 @@ namespace EcoChef.Web.Pages.Recipes
                 return NotFound();
             }
 
-            var reteta = await _context.Retete.FirstOrDefaultAsync(m => m.Id == id);
-            if (reteta == null)
+            Reteta = await _context.Retete
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (Reteta == null)
             {
                 return NotFound();
             }
-            else
-            {
-                Reteta = reteta;
-            }
+
+            Ingrediente = await _context.IngredientRetete
+                .Where(ir => ir.RetetaId == id)
+                .Include(ir => ir.Ingredient)
+                .ToListAsync();
+
+            var setari = await _context.Setari.FirstOrDefaultAsync();
+            MarjaProfit = setari?.MarjaProfit ?? 30;
+
             return Page();
         }
     }

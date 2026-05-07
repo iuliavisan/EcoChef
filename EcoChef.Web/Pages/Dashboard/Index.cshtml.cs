@@ -20,9 +20,10 @@ namespace EcoChef.Web.Pages.Dashboard
 
         public async Task OnGetAsync()
         {
+            var azi = DateTime.Now;
             var limita = DateTime.Now.AddDays(3);
             IngredienteExpira = await _context.Ingrediente
-                .Where(i => i.DataExpirare <= limita)
+                .Where(i => i.DataExpirare >= azi && i.DataExpirare <= limita)
                 .ToListAsync();
 
             //id urile ingredientelor care expira
