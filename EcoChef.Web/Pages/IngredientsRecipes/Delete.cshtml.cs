@@ -29,8 +29,10 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
                 return NotFound();
             }
 
-            var ingredientreteta = await _context.IngredientRetete.FirstOrDefaultAsync(m => m.Id == id);
-
+            var ingredientreteta = await _context.IngredientRetete
+                .Include(ir => ir.Reteta)
+                .Include(ir => ir.Ingredient)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (ingredientreteta == null)
             {
                 return NotFound();
@@ -52,12 +54,14 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
             var ingredientreteta = await _context.IngredientRetete.FindAsync(id);
             if (ingredientreteta != null)
             {
+                var retetaId = ingredientreteta.RetetaId;
                 IngredientReteta = ingredientreteta;
                 _context.IngredientRetete.Remove(IngredientReteta);
                 await _context.SaveChangesAsync();
+                return RedirectToPage("/Recipes/Details", new { id = retetaId });
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Recipes/Index");
         }
     }
 }

@@ -19,15 +19,21 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
             _context = context;
         }
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? retetaId)
         {
+            if (retetaId.HasValue)
+            {
+                IngredientRetetaForm = new IngredientReteta { RetetaId = retetaId.Value };
+            }
         ViewData["IngredientId"] = new SelectList(_context.Ingrediente, "Id", "Nume");
         ViewData["RetetaId"] = new SelectList(_context.Retete, "Id", "Nume");
+            ViewData["Unitati"] = _context.Ingrediente
+                .ToDictionary(i => i.Id, i => i.UnitateMasura);
             return Page();
         }
 
         [BindProperty]
-        public IngredientReteta IngredientReteta { get; set; } = default!;
+        public IngredientReteta IngredientRetetaForm { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -37,10 +43,10 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
                 return Page();
             }
 
-            _context.IngredientRetete.Add(IngredientReteta);
+            _context.IngredientRetete.Add(IngredientRetetaForm);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Recipes/Details", new {id = IngredientRetetaForm.RetetaId});
         }
     }
 }

@@ -45,8 +45,10 @@
         }
     </tbody>
 </table>
-<a asp-page ="/IngrdientsRecipes/Create" class="btn btn-primary" style="margin-top: 8px;">
-    + Adaugă ingrdient
+<a asp-page ="/IngredientsRecipes/Create"
+    asp-route-retetaId="@Model.Reteta.Id"
+    class="btn btn-primary" style="margin-top: 8px;">
+    + Adaugă ingredient
     </a>
 <div style="margin-top: 80px;">
     <a asp-page="./Edit" asp-route-id="@Model.Reteta.Id" class="btn btn-secondary">Editează rețetă </a> |

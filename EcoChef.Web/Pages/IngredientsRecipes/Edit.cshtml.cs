@@ -38,6 +38,8 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
             IngredientReteta = ingredientreteta;
            ViewData["IngredientId"] = new SelectList(_context.Ingrediente, "Id", "Nume");
            ViewData["RetetaId"] = new SelectList(_context.Retete, "Id", "Nume");
+            ViewData["Unitati"] = _context.Ingrediente
+                .ToDictionary(i => i.Id, i => i.UnitateMasura);
             return Page();
         }
 
@@ -68,7 +70,7 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Recipes/Details", new { id = IngredientReteta.RetetaId }); ;
         }
 
         private bool IngredientRetetaExists(int id)

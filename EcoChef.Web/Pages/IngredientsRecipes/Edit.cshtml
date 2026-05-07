@@ -21,7 +21,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IngredientReteta.IngredientId" class="control-label"></label>
-                <select asp-for="IngredientReteta.IngredientId" class="form-control" asp-items="ViewBag.IngredientId" ></select>
+                <select asp-for="IngredientReteta.IngredientId" class="form-control" asp-items="ViewBag.IngredientId" id="ingredientSelect" onchange="aratUnitate()" ></select>
+                <span id="unitateSpan" style="font-weight: 700; color: #2d7a47; margin-left: 8px;"></span>
                 <span asp-validation-for="IngredientReteta.IngredientId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,9 +38,18 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="/Recipes/Details" asp-route-id="@Model.IngredientReteta.RetetaId">Înapoi la rețetă</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const unitati = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewData["Unitati"]));
+        function aratUnitate(){
+            const id = document.getElementById('ingredientSelect').value;
+            const unitate = unitati[parseInt(id)] || '';
+            document.getElementById('unitateSpan').textContent=unitate;
+        }
+        aratUnitate();
+    </script>
 }

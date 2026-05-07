@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Reteta.Id" />
             <div class="form-group">
@@ -43,6 +43,17 @@
                     <option value="Altele">Altele</option>
 
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Imagine rețetă</label>
+                @if (!string.IsNullOrEmpty(Model.Reteta.ImagineReteta))
+                {
+                    <div style="margin-bottom: 8px;">
+                        <img src="~/img/@Model.Reteta.ImagineReteta" style="width: 100%; border-radius: 12px;" />
+                    </div>
+                }
+                <input type="file" name="poza" accept="image/*" class="form-control" />
             </div>
 
             <div class="form-group">

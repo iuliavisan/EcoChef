@@ -41,11 +41,23 @@ namespace EcoChef.Web.Pages.Recipes
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile? poza)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if(poza != null && poza.Length > 0)
+            {
+                var numeFisier = Guid.NewGuid().ToString() + Path.GetExtension(poza.FileName);
+                var caleFisier = Path.Combine("wwwroot", "img", numeFisier);
+
+                using(var stream = new FileStream(caleFisier, FileMode.Create))
+                {
+                    await poza.CopyToAsync(stream);
+                }
+                Reteta.ImagineReteta = numeFisier;
             }
 
             _context.Attach(Reteta).State = EntityState.Modified;

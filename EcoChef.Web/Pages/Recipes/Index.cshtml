@@ -27,6 +27,11 @@
                 var profitPortie = pretMeniu - costProductie;
 
                 <div class="reteta-card">
+                    @if (!string.IsNullOrEmpty(item.ImagineReteta))
+                    {
+                        <img src="~/img/@item.ImagineReteta"
+                        style="width: 100%; height:140px; object-fit:cover; border-radius: 16px 16px 0 0;" />
+                    }
                     <div class="reteta-card-header">
                         @item.Nume
                     </div>

@@ -24,6 +24,7 @@ namespace EcoChef.Web.Models
 
         [Display(Name = "Categorie")]
         public string Categorie { get; set; } = "Altele";
+        public string? ImagineReteta { get; set; }
     }// <> lista care contine obicecte de tip IngredientReteta
     //? pt ca lista poate fi nulla
 }

@@ -14,17 +14,18 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IngredientReteta.RetetaId" class="control-label"></label>
-                <select asp-for="IngredientReteta.RetetaId" class ="form-control" asp-items="ViewBag.RetetaId" ></select>
+                <label asp-for="IngredientRetetaForm.RetetaId" class="control-label"></label>
+                <select asp-for="IngredientRetetaForm.RetetaId" class ="form-control" asp-items="ViewBag.RetetaId" ></select>
             </div>
             <div class="form-group">
-                <label asp-for="IngredientReteta.IngredientId" class="control-label"></label>
-                <select asp-for="IngredientReteta.IngredientId" class ="form-control" asp-items="ViewBag.IngredientId" ></select>
+                <label asp-for="IngredientRetetaForm.IngredientId" class="control-label"></label>
+                <select asp-for="IngredientRetetaForm.IngredientId" class ="form-control" asp-items="ViewBag.IngredientId" id="ingredientSelect" onchange="aratUnitate()"></select>
+                <span id="unitateSpan" style="font-weight: 700; color: #2d7a4f; margin-left: 8px;"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IngredientReteta.CantitateNecesara" class="control-label"></label>
-                <input asp-for="IngredientReteta.CantitateNecesara" class="form-control" />
-                <span asp-validation-for="IngredientReteta.CantitateNecesara" class="text-danger"></span>
+                <label asp-for="IngredientRetetaForm.CantitateNecesara" class="control-label"></label>
+                <input asp-for="IngredientRetetaForm.CantitateNecesara" class="form-control" />
+                <span asp-validation-for="IngredientRetetaForm.CantitateNecesara" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -34,9 +35,18 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/Recipes/Index">Înapoi la Rețete</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        const unitati = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewData["Unitati"]));
+        function aratUnitate(){
+            const id = document.getElementById('ingredientSelect').value;
+            const unitate=unitati[parseInt(id)] || '';
+            document.getElementById('unitateSpan').textContent = unitate;
+        }
+        aratUnitate();
+    </script>
 }
