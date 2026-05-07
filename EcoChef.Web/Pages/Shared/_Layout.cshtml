@@ -3,70 +3,81 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EcoChef.Web</title>
+    <title>@ViewData["Title"] - EcoChef</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EcoChef.Web.styles.css" asp-append-version="true" />
+    <!-- Font Awesome pentru iconite -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index" style="display: flex; align-items:center;">      
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Dashboard/Index">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Ingredients/Index">Ingrediente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Recipes/Index">Rețete</a>
-                        </li>
-                     
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Cooking/Index">Gătire</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Losses/Index">Pierderi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Reports/Index">Rapoarte</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Settings/Index">Setări</a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="app-wrapper">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <!-- Logo/Nume aplicatie -->
+            <div class="sidebar-brand">
+                <img src="~/img/eco1.png" alt="EcoChef" style="width: 180px; height: auto; margin: 0; display: block;"/>
             </div>
-        </nav>
-    </header>
 
-    <div class="container">
-        <main role="main" class="pb-3" style="padding-bottom: 100px !important;">
-            @RenderBody()
-        </main>
-    </div>
+            <!-- Linkuri navigare -->
+            <nav class="sidebar-nav">
+                <a class="sidebar-link" asp-page="/Index">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
+                <a class="sidebar-link" asp-page="/Dashboard/Index">
+                    <i class="fa-solid fa-gauge"></i> Dashboard
+                </a>
 
-    <footer class="border-top footer text-muted" style="height:30px">
-        <div class="container">
-            &copy; 2026 - EcoChef.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+                <div class="sidebar-section">Gestiune</div>
+                <a class="sidebar-link" asp-page="/Ingredients/Index">
+                    <i class="fa-solid fa-carrot"></i> Ingrediente
+                </a>
+                <a class="sidebar-link" asp-page="/Recipes/Index">
+                    <i class="fa-solid fa-book-open"></i> Rețete
+                </a>
+
+                <div class="sidebar-section">Operațiuni</div>
+                <a class="sidebar-link" asp-page="/Cooking/Index">
+                    <i class="fa-solid fa-fire-burner"></i> Gătire
+                </a>
+                <a class="sidebar-link" asp-page="/Losses/Index">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Pierderi
+                </a>
+
+                <div class="sidebar-section">Analiză</div>
+                <a class="sidebar-link" asp-page="/Reports/Index">
+                    <i class="fa-solid fa-chart-bar"></i> Rapoarte
+                </a>
+                <a class="sidebar-link" asp-page="/Settings/Index">
+                    <i class="fa-solid fa-gear"></i> Setări
+                </a>
+            </nav>
+
+            <!-- Footer sidebar -->
+            <div class="sidebar-footer">
+                <span>© 2026 EcoChef</span>
+            </div>
         </div>
-    </footer>
+
+        <!-- MAIN AREA -->
+        <div class="main-area">
+            <!-- Top bar -->
+            <div class="top-bar">
+                <span class="top-bar-title">@ViewData["Title"]</span>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
