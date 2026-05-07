@@ -21,6 +21,9 @@ namespace EcoChef.Web.Models
         public decimal PretProductie { get; set; }
 
         public decimal MarjaProfit { get; set; }
+
+        [Display(Name = "Categorie")]
+        public string Categorie { get; set; } = "Altele";
     }// <> lista care contine obicecte de tip IngredientReteta
     //? pt ca lista poate fi nulla
 }

@@ -1,95 +1,76 @@
 ﻿@page
 @model EcoChef.Web.Pages.Recipes.IndexModel
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rețete";
 }
 
-<h1>Index</h1>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <h1 style="margin: 0;">Rețete</h1>
+    <a asp-page="Create" class="btn btn-primary">+ Rețetă nouă</a>
+</div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-
-<input type="text" id="cautare" placeholder="Caută rețetă"
-       class="form-control" style="margin-bottom: 16px; max-width: 400px;"
+<input type="text" id="cautare" placeholder="Caută rețetă..."
+       class="form-control" style="margin-bottom: 24px; max-width: 400px;"
        onkeyup="filtreaza()" />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Reteta[0].Nume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reteta[0].Instructiuni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reteta[0].TimpPreparare)
-            </th>
-            <th>
-                Cost producție per porție
-            </th>
-            <th>
-                Profit per porție
-            </th>
-            <th>
-                Marjă profit
-            </th>
-            <th>
-                Preț meniu
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Reteta) {
-            
+@foreach (var categorie in Model.RetetePerCategorie)
+{
+    <div class="categorie-grup" style="margin-bottom: 40px;">
+        <h3 style="margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid rgba(67,198,122,0.3);">
+            @categorie.Key
+        </h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+            @foreach (var item in categorie.Value)
+            {
                 var costProductie = item.IngredientReteta?.Sum(ir => ir.CantitateNecesara * ir.Ingredient.PretAchizitie) ?? 0;
-                var marjaProfit = Model.MarjaProfit;
-                var pretMeniu = costProductie + (costProductie * marjaProfit / 100);
+                var pretMeniu = costProductie + (costProductie * Model.MarjaProfit / 100);
                 var profitPortie = pretMeniu - costProductie;
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Instructiuni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimpPreparare)
-            </td>
-            <td>
-                @costProductie.ToString("0.00") lei
-            </td>
-            <td>
-                @Math.Round(profitPortie, 2).ToString("0.00") lei
-            </td>
-            <td>
-                @marjaProfit %
-            </td>
-            <td>
-                @pretMeniu.ToString("0.00") lei 
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+                <div class="reteta-card">
+                    <div class="reteta-card-header">
+                        @item.Nume
+                    </div>
+                    <div class="reteta-card-body">
+                        <div class="reteta-stat">
+                            <span>⏱️</span> @item.TimpPreparare min
+                        </div>
+                        <div class="reteta-stat">
+                            <span>💰</span> Cost: @costProductie.ToString("0.00") lei
+                        </div>
+                        <div class="reteta-stat">
+                            <span>📈</span> Profit: @profitPortie.ToString("0.00") lei
+                        </div>
+                        <div class="reteta-stat">
+                            <span>🏷️</span> Preț: @pretMeniu.ToString("0.00") lei
+                        </div>
+                    </div>
+                    <div class="reteta-card-footer">
+                        <a asp-page="./Details" asp-route-id="@item.Id">Detalii</a>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Șterge</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 }
-    </tbody>
-</table>
 
 @section Scripts {
     <script>
         function filtreaza() {
             const text = document.getElementById('cautare').value.toLowerCase();
-            const randuri = document.querySelectorAll('tbody tr');
+            const carduri = document.querySelectorAll('.reteta-card');
+            const grupuri = document.querySelectorAll('.categorie-grup');
 
-            randuri.forEach(rand => {
-                const continut = rand.textContent.toLowerCase();
-                rand.style.display = continut.includes(text) ? '' : 'none';
+            carduri.forEach(card => {
+                const continut = card.textContent.toLowerCase();
+                card.style.display = continut.includes(text) ? '' : 'none';
+            });
+
+            grupuri.forEach(grup => {
+                const vizibile = [...grup.querySelectorAll('.reteta-card')]
+                    .filter(c => c.style.display !== 'none');
+                grup.style.display = vizibile.length === 0 ? 'none' : '';
             });
         }
     </script>

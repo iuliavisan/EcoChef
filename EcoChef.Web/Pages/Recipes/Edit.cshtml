@@ -32,6 +32,20 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Reteta.Categorie" class="control-label"></label>
+                <select asp-for="Reteta.Categorie" class="form-control">
+                    <option value="Pizza și Paste">🍕 Pizza și Paste</option>
+                    <option value="Carne și Pește">🥩 Carne și Pește</option>
+                    <option value="Ouă și Lactate">🥚 Ouă și Lactate</option>
+                    <option value="Supe și Ciorbe">🥣 Supe și Ciorbeă</option>
+                    <option value="Deserturi">🍰 Deserturi</option>
+                    <option value="Salate">🥗 Salate</option>
+                    <option value="Altele">Altele</option>
+
+                </select>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

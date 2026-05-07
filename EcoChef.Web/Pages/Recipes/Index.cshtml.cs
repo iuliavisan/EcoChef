@@ -23,6 +23,7 @@ namespace EcoChef.Web.Pages.Recipes
         public IList<Reteta> Reteta { get;set; } = default!;
 
         public decimal MarjaProfit { get; set; }
+        public Dictionary<string, List<Reteta>> RetetePerCategorie { get; set; } = new(); 
         public async Task OnGetAsync()
         {
             var setari = await _context.Setari.FirstOrDefaultAsync();
@@ -32,6 +33,10 @@ namespace EcoChef.Web.Pages.Recipes
                 .Include(reteta => reteta.IngredientReteta)
                     .ThenInclude(ingredient_reteta => ingredient_reteta.Ingredient)
                 .ToListAsync();
+
+            RetetePerCategorie = Reteta
+                .GroupBy(r=>r.Categorie)
+                .ToDictionary(g=>g.Key, g=>g.ToList());
         }
     }
 }
