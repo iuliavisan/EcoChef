@@ -47,6 +47,9 @@ namespace EcoChef.Web.Pages.Recipes
             {
                 return Page();
             }
+            var pozaVeche = (await _context.Retete
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(r => r.Id == Reteta.Id))?.ImagineReteta;
 
             if(poza != null && poza.Length > 0)
             {
@@ -59,8 +62,12 @@ namespace EcoChef.Web.Pages.Recipes
                 }
                 Reteta.ImagineReteta = numeFisier;
             }
+            else
+            {
+                Reteta.ImagineReteta = pozaVeche;
+            }
 
-            _context.Attach(Reteta).State = EntityState.Modified;
+                _context.Attach(Reteta).State = EntityState.Modified;
 
             try
             {
