@@ -54,6 +54,27 @@
                 </a>
             </nav>
 
+            <div style="padding: 12px;">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form method="post" action="/Identity/Account/Logout">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="sidebar-link" style="width: 100%; border: none; background: none; cursor: pointer;">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </button>
+                    </form>
+                    <div style="font-size: 0.8rem; color: #666; padding: 8px 14px;">
+                        @User.Identity.Name
+                    </div>
+                }
+                else
+                {
+                    <a class="sidebar-link" href="/Identity/Account/Login">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                }
+            </div>
+
             <!-- Footer sidebar -->
             <div class="sidebar-footer">
                 <span>© 2026 EcoChef</span>
