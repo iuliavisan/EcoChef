@@ -52,7 +52,15 @@
                 <a class="sidebar-link" asp-page="/Settings/Index">
                     <i class="fa-solid fa-gear"></i> Setări
                 </a>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a class="sidebar-link" asp-page="/Admin/Users">
+                        <i class="fa-solid fa-users"></i>Utilizatori    
+                    </a>
+                }
             </nav>
+
 
             <div style="padding: 12px;">
                 @if (User.Identity.IsAuthenticated)

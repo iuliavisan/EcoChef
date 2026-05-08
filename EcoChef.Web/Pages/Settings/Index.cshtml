@@ -2,13 +2,13 @@
 @model EcoChef.Web.Pages.Settings.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Setări";
 }
 
-<h1>Index</h1>
+<h1>Setări admin</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Creează</a>
 </p>
 <table class="table">
     <thead>
@@ -26,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.MarjaProfit)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Editează</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Detalii</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Șterge</a>
             </td>
         </tr>
 }

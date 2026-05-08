@@ -2,13 +2,13 @@
 @model EcoChef.Web.Pages.Settings.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalii";
 }
 
-<h1>Details</h1>
+<h1>Detalii setare</h1>
 
 <div>
-    <h4>Setari</h4>
+    <h4>Setări</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -20,6 +20,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Setari.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Setari.Id">Editează</a> |
+    <a asp-page="./Index">Înapoi la setări</a>
 </div>

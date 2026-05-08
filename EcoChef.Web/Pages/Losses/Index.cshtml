@@ -7,7 +7,7 @@
     var ziuaUrmatoare = Model.DataSelectata.AddDays(+1).ToString("yyyy-MM-dd");
 }
 
-<h1>Pierderi</h1>
+<h1>Pagina principală pierderi</h1>
 
 <div style ="display: flex; align-items: center; gap:16px; margin-bottom: 24px;">
     <a asp-page="./Index"
@@ -60,9 +60,9 @@
         <td>@item.MotivPierdere</td>
         <td>@item.PretPierdere.ToString("0.00") lei</td>
         <td>
-           <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-           <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-           <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+           <a asp-page="./Edit" asp-route-id="@item.Id">Editează</a> |
+           <a asp-page="./Details" asp-route-id="@item.Id">Detalii</a> |
+           <a asp-page="./Delete" asp-route-id="@item.Id">Șterge</a>
         </td>
     </tr>
     }
