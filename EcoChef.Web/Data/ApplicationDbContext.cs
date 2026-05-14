@@ -8,7 +8,7 @@ namespace EcoChef.Web.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            //totul vine din Program.cs
         }
         public DbSet<Ingredient> Ingrediente {  get; set; } //DbSet creeaza tabelul din BD numit "Ingrediente" iar coloanele+regulile sunt luate din clasa "Ingredient" 
 

@@ -4,6 +4,7 @@ using EcoChef.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcoChef.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260514094324_EliminaPretProductie")]
+    partial class EliminaPretProductie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,6 +163,9 @@ namespace EcoChef.Web.Migrations
 
                     b.Property<string>("Instructiuni")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("MarjaProfit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Nume")
                         .IsRequired()

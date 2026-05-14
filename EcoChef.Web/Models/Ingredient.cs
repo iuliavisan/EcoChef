@@ -8,7 +8,6 @@ namespace EcoChef.Web.Models
 {
     public class Ingredient
     {
-        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Numele ingredientului este obligatoriu!")]
@@ -19,7 +18,7 @@ namespace EcoChef.Web.Models
 
         public required string UnitateMasura { get; set; }
 
-        [Required(ErrorMessage = "Prețul per unitate de masură este obligatoriu!")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Prețul per unitate de masură trebuie să fie mai mare decât 0!")]
         [Display(Name = "Preț achiziție per unitate de măsură")]
 
         public decimal PretAchizitie { get; set; }

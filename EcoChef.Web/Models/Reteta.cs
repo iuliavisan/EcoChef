@@ -16,15 +16,12 @@ namespace EcoChef.Web.Models
         [Display(Name = "Timp (minute)")]
         public int TimpPreparare { get; set; }
 
-        public ICollection<IngredientReteta>? IngredientReteta { get; set; }
-
-        public decimal PretProductie { get; set; }
-
-        public decimal MarjaProfit { get; set; }
-
         [Display(Name = "Categorie")]
         public string Categorie { get; set; } = "Altele";
         public string? ImagineReteta { get; set; }
+
+        public ICollection<IngredientReteta>? IngredientReteta { get; set; }//ingredientele din ingredientreteta
+
     }// <> lista care contine obicecte de tip IngredientReteta
     //? pt ca lista poate fi nulla
 }
