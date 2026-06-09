@@ -7,14 +7,11 @@
 
 <h1>Setări admin</h1>
 
-<p>
-    <a asp-page="Create">Creează</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Setari[0].MarjaProfit)
+                Marjă Profit (%)
             </th>
             <th></th>
         </tr>
@@ -23,12 +20,10 @@
 @foreach (var item in Model.Setari) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MarjaProfit)
+                @item.MarjaProfit %
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Editează</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detalii</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Șterge</a>
             </td>
         </tr>
 }

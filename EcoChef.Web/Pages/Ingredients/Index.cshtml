@@ -48,7 +48,13 @@
             <td>@item.UnitateMasura</td>
             <td>@item.PretAchizitie lei</td>
             <td>@item.StocCurent @item.UnitateMasura</td>
-            <td>@item.DataExpirare.ToString("dd/MM/yyyy")</td>
+            <td>
+                @if (item.StocCurent == 0){
+                    <span style="background: #e53935; color:white; padding: 2px 8px; border-radius: 8px; font-size: 0.75rem;">Fără stoc</span>
+                }else{
+                @item.DataExpirare.ToString("dd/MM/yyyy")
+                }
+            </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Editează</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Detalii</a> |

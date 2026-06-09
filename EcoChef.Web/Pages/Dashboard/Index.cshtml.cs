@@ -16,7 +16,7 @@ namespace EcoChef.Web.Pages.Dashboard
         }
 
         public List<Ingredient> IngredienteExpira { get; set; } = new List<Ingredient>();
-        public List<Reteta> ReteteRecomandate { get; set; }=new List<Reteta> ();
+        public List<Reteta> ReteteRecomandate { get; set; } = new List<Reteta>();
 
         public async Task OnGetAsync()
         {
@@ -31,12 +31,43 @@ namespace EcoChef.Web.Pages.Dashboard
 
             //gaseste retete care contin cel putin un ingredient care expira
             ReteteRecomandate = await _context.Retete
-                .Where(r=> r.IngredientReteta
+                .Where(r => r.IngredientReteta
                     .Any(ir => idExpira.Contains(ir.IngredientId)))
                 .Include(r => r.IngredientReteta)
                     .ThenInclude(ir => ir.Ingredient)
                 .ToListAsync();
 
         }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            {
+                var azi = DateTime.Now;
+
+                var ingredienteExpirate = await _context.Ingrediente
+                    .Where(i => i.DataExpirare < azi && i.StocCurent > 0)
+                    .ToListAsync();
+
+                foreach (var ingredient in ingredienteExpirate)
+                {
+                    var pierdere = new Pierdere
+                    {
+                        IngredientId = ingredient.Id,
+                        CantitatePierdere = ingredient.StocCurent,
+                        MotivPierdere = "Expirat automat",
+                        DataPierdere = azi,
+                        PretPierdere = ingredient.StocCurent * ingredient.PretAchizitie
+                    };
+                    _context.Pierderi.Add(pierdere);
+
+                    ingredient.StocCurent = 0;
+                }
+                await _context.SaveChangesAsync();
+                return RedirectToPage();
+            }
+        }
     }
 }
+        
+    
+

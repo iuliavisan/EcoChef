@@ -42,7 +42,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AllowAnonymousToFolder("/Identity");
     options.Conventions.AuthorizeFolder("/Settings", "Admin");
     options.Conventions.AuthorizeFolder("/Reports", "Manager");
-    options.Conventions.AuthorizeFolder("/Dashboard", "Manager");
+    options.Conventions.AuthorizeFolder("/Dashboard", "Bucatar");
 });
 
 var app = builder.Build();
