@@ -57,11 +57,10 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Date din C# -> JavaScript
+
         const reteteData = @Html.Raw(Model.ReteteJson);
         const pierderiData = @Html.Raw(Model.PierderiJson);
 
-        // Grafic retete
         new Chart(document.getElementById('reteteChart'), {
             type: 'bar',
             data: {
@@ -87,7 +86,6 @@
             }
         });
 
-        // Grafic pierderi
         new Chart(document.getElementById('pierderiChart'), {
             type: 'bar',
             data: {

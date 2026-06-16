@@ -27,7 +27,6 @@ namespace EcoChef.Web.Pages.Reports
             LunaSelectata = new DateTime(an ?? azi.Year, luna ?? azi.Month, 1);
             var sfarsitLuna = LunaSelectata.AddMonths(1);
 
-            //cele mai gatite retete
             var reteteGatite = await _context.IstoricGatire
                 .Where(g => g.DataGatirii >= LunaSelectata && g.DataGatirii < sfarsitLuna)
                 .Include(g => g.Reteta)

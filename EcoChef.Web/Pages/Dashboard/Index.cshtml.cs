@@ -26,10 +26,8 @@ namespace EcoChef.Web.Pages.Dashboard
                 .Where(i => i.DataExpirare >= azi && i.DataExpirare <= limita)
                 .ToListAsync();
 
-            //id urile ingredientelor care expira
             var idExpira = IngredienteExpira.Select(i => i.Id).ToList();
 
-            //gaseste retete care contin cel putin un ingredient care expira
             ReteteRecomandate = await _context.Retete
                 .Where(r => r.IngredientReteta
                     .Any(ir => idExpira.Contains(ir.IngredientId)))

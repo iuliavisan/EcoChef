@@ -44,17 +44,13 @@ namespace EcoChef.Web.Pages.Cooking
                 .Include(rand => rand.Ingredient)
                 .ToList();
 
-            //primul foreach doar verifica daca ai
             foreach(var ingredient_reteta in ingrediente)
             {
-                //pentru fiecare ingredient
                 var cantitateTotal = ingredient_reteta.CantitateNecesara * NrPortii;
 
                 if(ingredient_reteta.Ingredient.StocCurent < cantitateTotal)
                 {
-                    //mesaj de eroare
                     ModelState.AddModelError("",
-                        //string Sinterpolation
                         $"Stoc insuficient pentru {ingredient_reteta.Ingredient.Nume}. " +
                         $"Ai {ingredient_reteta.Ingredient.StocCurent} în stoc, îți trebuie {cantitateTotal}.");
                 }

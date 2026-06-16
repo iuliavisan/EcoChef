@@ -44,9 +44,9 @@ namespace EcoChef.Web.Pages.Losses
 
             ingredient.StocCurent -= Pierdere.CantitatePierdere;
 
-            _context.Pierderi.Add(Pierdere);//e doar adaugat in memorie, nu salvat in BD!
+            _context.Pierderi.Add(Pierdere);
             
-            await _context.SaveChangesAsync();//acum se salveaza in BD
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
