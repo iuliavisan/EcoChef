@@ -7,10 +7,8 @@ using EcoChef.Web.Migrations;
 
 namespace EcoChef.Web.Pages.Cooking
 {
-    //punctul de la metode inlantuite=aplica pe ce e inainte
-    //: inseamna mostenire
-    // => inseamna pentru care/astfel incat
-    public class IndexModel : PageModel //defineste clasa aici pentru ca e un model de pagina, nu de BD
+  
+    public class IndexModel : PageModel 
     {
         private readonly ApplicationDbContext _context;
         public IndexModel(ApplicationDbContext context)
@@ -18,14 +16,14 @@ namespace EcoChef.Web.Pages.Cooking
             _context = context;
         }
 
-        public List<Reteta> Retete { get; set; } = new List<Reteta>(); //creeaza o lista Reteta din Retete
+        public List<Reteta> Retete { get; set; } = new List<Reteta>(); 
         public List<IstoricGatire> Istoric { get; set; }
         public DateTime DataSelectata { get; set; } = DateTime.Today;
-        public void OnGet(DateTime? data)//fara argumente deoarece afiseaza toate retetele
+        public void OnGet(DateTime? data)
         {
             DataSelectata = data ?? DateTime.Today;
         
-            Retete = _context.Retete.ToList(); //pui elementele din BD din Retete(tabelul din context) in lista creata
+            Retete = _context.Retete.ToList(); 
 
             Istoric = _context.IstoricGatire
                 .Where(g => g.DataGatirii.Date == DataSelectata.Date)
@@ -34,12 +32,11 @@ namespace EcoChef.Web.Pages.Cooking
                 .ToList();
         }
 
-        //onpost primeste datele dupa ce se apasa submit
-        public IActionResult OnPost(int RetetaId, int NrPortii) //IActionResult penru ca rerneaza o actiune
+        public IActionResult OnPost(int RetetaId, int NrPortii) 
         {
-            Retete = _context.Retete.ToList();//e iar pt ca lista trebuie reincarcata
+            Retete = _context.Retete.ToList();
             
-            var ingrediente = _context.IngredientRetete //tabelul IngredientRetete din BD
+            var ingrediente = _context.IngredientRetete 
                 .Where(rand => rand.RetetaId == RetetaId)
                 .Include(rand => rand.Ingredient)
                 .ToList();
@@ -65,7 +62,6 @@ namespace EcoChef.Web.Pages.Cooking
                 return Page();
             }
 
-            //al doilea foreach scade din stoc daca SUNT toate ingredientele
             foreach(var ingredient_reteta in ingrediente)
             {
                 var cantitateTotal = ingredient_reteta.CantitateNecesara * NrPortii;
@@ -96,7 +92,7 @@ namespace EcoChef.Web.Pages.Cooking
                 .Include(g => g.Reteta)
                 .ToList();
 
-            return Page(); //ramai pe aceeasi pagina
+            return Page(); 
         }
 
         public async Task<IActionResult> OnPostStergeAsync(int id)
@@ -122,7 +118,7 @@ namespace EcoChef.Web.Pages.Cooking
             _context.IstoricGatire.Remove(gatire);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage(); //reincarca pagina curenta dupa stergere
+            return RedirectToPage(); 
         }
     }
 }

@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EcoChef.Web.styles.css" asp-append-version="true" />
-    <!-- Font Awesome pentru iconite -->
+   <!--font iconite-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
     <div class="app-wrapper">
 
-        <!-- SIDEBAR -->
+        
         <div class="sidebar">
-            <!-- Logo/Nume aplicatie -->
+            
             <div class="sidebar-brand">
                 <img src="~/img/eco1.png" alt="EcoChef" style="width: 180px; height: auto; margin: 0; display: block;"/>
             </div>
 
-            <!-- Linkuri navigare -->
+            
             <nav class="sidebar-nav">
                 <a class="sidebar-link" asp-page="/Index">
                     <i class="fa-solid fa-house"></i> Home
@@ -83,20 +83,20 @@
                 }
             </div>
 
-            <!-- Footer sidebar -->
+            
             <div class="sidebar-footer">
                 <span>© 2026 EcoChef</span>
             </div>
         </div>
 
-        <!-- MAIN AREA -->
+       
         <div class="main-area">
-            <!-- Top bar -->
+            
             <div class="top-bar">
                 <span class="top-bar-title">@ViewData["Title"]</span>
             </div>
 
-            <!-- Content -->
+            
             <div class="content">
                 @RenderBody()
             </div>

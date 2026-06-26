@@ -61,7 +61,7 @@ namespace EcoChef.Web.Pages.Reports
             TotalProfit = istoricLuna.Sum(g => g.PretVanzareTotal - g.CostTotal);
             TotalPierderi = pierderi.Sum(p => p.TotalPierdere);
 
-            //serializare pt js
+          
             ReteteJson = JsonSerializer.Serialize(reteteGatite);
             PierderiJson = JsonSerializer.Serialize(pierderi);
         }

@@ -10,7 +10,7 @@ namespace EcoChef.Web.Models
         [Display(Name = "Ingredient")]
 
         public int IngredientId { get; set; }
-        public Ingredient? Ingredient { get; set; } //ia TOT din Ingredient
+        public Ingredient? Ingredient { get; set; } 
 
         [Range(0.1, double.MaxValue, ErrorMessage = "Cantitatea pierderii este obligatorie!")]
         [Display(Name = "Cantitate")]

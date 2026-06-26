@@ -4,7 +4,6 @@ namespace EcoChef.Web.Models
 {
     public class Reteta
     {
-    //functioneaza la fel id si fara [key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Numele rețetei este obligatoriu!")]
@@ -20,8 +19,7 @@ namespace EcoChef.Web.Models
         public string Categorie { get; set; } = "Altele";
         public string? ImagineReteta { get; set; }
 
-        public ICollection<IngredientReteta>? IngredientReteta { get; set; }//ingredientele din ingredientreteta
+        public ICollection<IngredientReteta>? IngredientReteta { get; set; }
 
-    }// <> lista care contine obicecte de tip IngredientReteta
-    //? pt ca lista poate fi nulla
+    }
 }

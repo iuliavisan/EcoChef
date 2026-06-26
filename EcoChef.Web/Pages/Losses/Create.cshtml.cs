@@ -27,13 +27,12 @@ namespace EcoChef.Web.Pages.Losses
         return Page();
         }
 
-        [BindProperty] //puteai face si onpost cu argumente dar aici ai mai multe campuri de adus
-        public Pierdere Pierdere { get; set; } = default!; //pentru o clasa, valoarea default este null
+        [BindProperty]
+        public Pierdere Pierdere { get; set; } = default!; 
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)//verifica validarile
+            if (!ModelState.IsValid)//validari 
             {
                 return Page();
             }

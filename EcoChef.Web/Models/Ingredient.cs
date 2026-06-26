@@ -1,8 +1,7 @@
 ﻿using System; //biblioteca principala Microsoft
-using System.ComponentModel.DataAnnotations; //pentru reguli
+using System.ComponentModel.DataAnnotations; //reguli
 
-//get->aplicatia are voie sa citeasca informatia
-//set->aplicatia are voie sa modifice si sa salveze info
+
 
 namespace EcoChef.Web.Models
 {

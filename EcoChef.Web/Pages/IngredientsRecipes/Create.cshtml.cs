@@ -35,7 +35,6 @@ namespace EcoChef.Web.Pages.IngredientsRecipes
         [BindProperty]
         public IngredientReteta IngredientRetetaForm { get; set; } = default!;
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

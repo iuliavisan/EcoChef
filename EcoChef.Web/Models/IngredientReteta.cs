@@ -5,15 +5,11 @@ namespace EcoChef.Web.Models
 {
     public class IngredientReteta
     {
-        public int Id { get; set; } //fiecare legatura are un id
+        public int Id { get; set; } 
 
-        //legatura cu reteta
-        public int RetetaId { get; set; } //nr retetei, se salveaza efectiv in bd
-        public Reteta? Reteta { get; set; } //reteta propriu-zisa, cu nume,timp,etc cu proprietate de navigare
-        //astea fk
-        //?-poate fi null
-
-        //legatura cu ingredientul
+        public int RetetaId { get; set; } 
+        public Reteta? Reteta { get; set; } 
+       
         public int IngredientId { get; set; }
         public Ingredient? Ingredient { get; set; }
 
