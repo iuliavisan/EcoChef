@@ -46,7 +46,7 @@ else
 
     @if (Model.ReteteRecomandate.Count == 0)
     {
-        <p class ="text-succes">Nicio recomandare momentan.</p>
+        <p class ="text-success">Nicio recomandare momentan.</p>
     }
     else
     {
@@ -57,7 +57,7 @@ else
                 <p style="color: #666; font-size: 0.9rem;">Ingrediente care expiră folosite în această rețetă:</p>
                 @foreach (var ir in reteta.IngredientReteta
                 
-                    .Where(ir => Model.IngredienteExpira.Select(i => i.Id).Contains(ir.IngredientId)))
+                    .Where(ir => Model.IngredienteExpira.Select(i => i.Id).Contains(ir.IngredientId)))//doarExp
                     {
                         <span style="background: rgba(255,200,0,0.2); padding:4px 10px; border-radius: 8px; margin-right: 8px; font-weight:700;">
                             @ir.Ingredient.Nume
