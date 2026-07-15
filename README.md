@@ -1,7 +1,7 @@
 # EcoChef
  EcoChef — Restaurant ERP System
 
-Bachelor's thesis project, Economic Informatics @ FSEGA, Babeș-Bolyai University
+Bachelor's thesis project, Business Information Systems @ FSEGA, Babeș-Bolyai University
 Author: Iulia-Raluca Vișan · Coordinator: Conf. univ. dr. Loredana Mocean
 
 What is this?
