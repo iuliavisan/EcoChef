@@ -27,8 +27,9 @@ ASP.NET Core 8, Razor Pages, Entity Framework Core, and SQL Server LocalDB for t
 
 How it's designed
 
-Before writing any code, I mapped out the actual process first: a BPMN diagram of how a restaurant handles this manually (As-Is), then how it would work with EcoChef (To-Be), plus a Fishbone diagram to dig into why food waste happens in the first place. From there I moved to a UML Use Case diagram for the three roles, an ERD for the data model, and a Deployment diagram for the overall architecture (browser → ASP.NET Core app → SQL Server, over HTTPS).
+Before writing any code, I mapped out the actual process first: a BPMN diagram of how a restaurant handles this manually (As-Is), then how it would work with EcoChef (To-Be), plus a Fishbone diagram to dig into why food waste happens in the first place. I also used a Data Flow Diagram to trace how information moves between the restaurant, the system, and the supplier.
 
+From there I moved to a UML Use Case diagram for the three roles, an ERD for the data model, and a Deployment diagram for the overall architecture (browser → ASP.NET Core app → SQL Server, over HTTPS).
 
 Testing
 
